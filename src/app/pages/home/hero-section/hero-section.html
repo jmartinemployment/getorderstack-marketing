@@ -1,0 +1,33 @@
+<gos-container>
+  <div class="hero-section">
+    <p class="hero-section__eyebrow">{{ hero.eyebrow }}</p>
+
+    <h1 class="hero-section__headline">
+      {{ hero.headlineBefore }}
+      <span class="hero-section__highlight">{{ hero.headlineHighlight }}</span>
+      @if (hero.headlineAfter) {
+        {{ hero.headlineAfter }}
+      }
+    </h1>
+
+    <p class="hero-section__subtitle">{{ hero.subtitle }}</p>
+
+    <div class="hero-section__ctas">
+      <a [routerLink]="hero.ctaPrimaryHref" class="hero-section__cta-link">
+        <gos-button variant="primary" size="lg">{{ hero.ctaPrimary }}</gos-button>
+      </a>
+      <a [routerLink]="hero.ctaSecondaryHref" class="hero-section__cta-link">
+        <gos-button variant="outline" size="lg">{{ hero.ctaSecondary }}</gos-button>
+      </a>
+    </div>
+
+    <div class="hero-section__stats">
+      @for (stat of hero.stats; track stat.label) {
+        <div class="hero-section__stat">
+          <span class="hero-section__stat-value">{{ stat.value }}</span>
+          <span class="hero-section__stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</gos-container>

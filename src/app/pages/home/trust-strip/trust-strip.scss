@@ -1,0 +1,55 @@
+@use 'styles/mixins' as *;
+
+.trust-strip {
+  position: relative;
+  z-index: 1;
+  padding: var(--gos-space-16) 0 var(--gos-space-12);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  animation: gos-fade-in 800ms ease 600ms both;
+}
+
+.trust-strip__heading {
+  font-family: var(--gos-font-body);
+  font-size: var(--gos-text-sm);
+  color: var(--gos-gray-500);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--gos-space-8);
+}
+
+.trust-strip__logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gos-space-8);
+
+  @include above(lg) {
+    gap: var(--gos-space-12);
+  }
+}
+
+.trust-strip__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-strip__logo-text {
+  font-family: var(--gos-font-display);
+  font-size: var(--gos-text-base);
+  font-weight: var(--gos-weight-semibold);
+  color: var(--gos-gray-500);
+  opacity: 0.6;
+  transition: opacity var(--gos-transition-fast);
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @include above(md) {
+    font-size: var(--gos-text-lg);
+  }
+}

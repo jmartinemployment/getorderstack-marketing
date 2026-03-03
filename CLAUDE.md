@@ -134,3 +134,18 @@ ng build                    # Production build
 - 55 tests across 12 spec files, all passing
 - Root component now renders LayoutComponent (replaced C-01 showcase)
 - Next: C-03 (hero section)
+
+**March 3, 2026 (C-03):**
+- Fixed SSR wildcard redirect: enumerated all routes for Prerender, wildcard uses Server mode
+- Built hero landing section: 4 new components + config file
+- HeroBackgroundComponent: CSS animated mesh gradient with grid overlay and floating orbs
+- HeroSectionComponent: headline with gradient highlight, dual CTAs, stat counters
+- ProductMockupComponent: CSS-only dashboard mockup (window chrome, sidebar, metrics, chart bars, order list)
+- TrustStripComponent: social proof bar with placeholder restaurant names
+- HomeComponent: composes all 4 hero sub-components inside HeroBackground
+- hero.config.ts: externalized all copy (headline, subtitle, CTAs, stats, trust logos)
+- Added tokens: --gos-text-7xl, --gos-radius-2xl, --gos-shadow-glow, --gos-transition-spring
+- Added animations: gos-mesh-shift, gos-float, gos-count-pulse
+- Barrel export at pages/home/index.ts
+- 82 tests across 17 spec files, all passing
+- Next: C-04 (features showcase)

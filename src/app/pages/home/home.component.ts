@@ -1,36 +1,28 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { GosContainerComponent, GosSectionHeaderComponent } from '../../core/components';
+import { HeroBackgroundComponent } from './hero-background/hero-background';
+import { HeroSectionComponent } from './hero-section/hero-section';
+import { ProductMockupComponent } from './product-mockup/product-mockup';
+import { TrustStripComponent } from './trust-strip/trust-strip';
 
 @Component({
   selector: 'gos-home-page',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [GosContainerComponent, GosSectionHeaderComponent],
+  imports: [
+    HeroBackgroundComponent,
+    HeroSectionComponent,
+    ProductMockupComponent,
+    TrustStripComponent,
+  ],
   template: `
-    <div class="hero">
-      <gos-container>
-        <gos-section-header
-          eyebrow="Restaurant Operating System"
-          title="Run your restaurant, not your software"
-          subtitle="POS, ordering, inventory, labor, and analytics — all in one platform built for South Florida restaurants."
-          align="center" />
-      </gos-container>
-    </div>
+    <gos-hero-background>
+      <gos-hero-section />
+      <gos-product-mockup />
+      <gos-trust-strip />
+    </gos-hero-background>
   `,
   styles: [`
     :host { display: block; }
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--gos-secondary);
-      padding-top: 120px;
-      padding-bottom: var(--gos-space-16);
-    }
-    :host ::ng-deep .gos-section-header__title { color: var(--gos-white); }
-    :host ::ng-deep .gos-section-header__subtitle { color: var(--gos-gray-400); }
-    :host ::ng-deep .gos-section-header__eyebrow { color: var(--gos-primary); }
   `],
 })
 export class HomeComponent {}

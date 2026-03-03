@@ -1,0 +1,12 @@
+<div class="trust-strip">
+  <gos-container>
+    <p class="trust-strip__heading">{{ heading }}</p>
+    <div class="trust-strip__logos">
+      @for (logo of logos; track logo) {
+        <div class="trust-strip__logo">
+          <span class="trust-strip__logo-text">{{ logo }}</span>
+        </div>
+      }
+    </div>
+  </gos-container>
+</div>

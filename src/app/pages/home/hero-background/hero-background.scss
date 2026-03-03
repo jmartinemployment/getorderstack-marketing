@@ -1,0 +1,59 @@
+@use 'styles/mixins' as *;
+
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+  background: var(--gos-secondary);
+  min-height: 100vh;
+}
+
+.hero-bg__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--gos-secondary) 0%,
+    #1e1e3a 25%,
+    #14142b 50%,
+    #1a1a3e 75%,
+    var(--gos-secondary) 100%
+  );
+  background-size: 400% 400%;
+  animation: gos-mesh-shift 20s ease infinite;
+}
+
+.hero-bg__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 70%);
+}
+
+.hero-bg__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.hero-bg__orb--1 {
+  width: 600px;
+  height: 600px;
+  background: var(--gos-primary);
+  top: -10%;
+  right: -5%;
+  animation: gos-float 8s ease-in-out infinite;
+}
+
+.hero-bg__orb--2 {
+  width: 400px;
+  height: 400px;
+  background: var(--gos-accent);
+  bottom: -5%;
+  left: -5%;
+  animation: gos-float 10s ease-in-out infinite 2s;
+}

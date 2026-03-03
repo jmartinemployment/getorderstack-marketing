@@ -1,0 +1,145 @@
+@use 'styles/mixins' as *;
+
+.hero-section {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 160px;
+  padding-bottom: var(--gos-space-16);
+
+  @include above(lg) {
+    padding-top: 200px;
+  }
+}
+
+.hero-section__eyebrow {
+  font-family: var(--gos-font-body);
+  font-size: var(--gos-text-sm);
+  font-weight: var(--gos-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gos-primary);
+  margin-bottom: var(--gos-space-6);
+  animation: gos-fade-in-down 600ms ease both;
+}
+
+.hero-section__headline {
+  font-family: var(--gos-font-display);
+  font-size: var(--gos-text-5xl);
+  font-weight: var(--gos-weight-extrabold);
+  line-height: var(--gos-leading-tight);
+  color: var(--gos-white);
+  max-width: 800px;
+  margin-inline: auto;
+  margin-bottom: var(--gos-space-6);
+  animation: gos-fade-in-up 600ms ease 100ms both;
+
+  @include above(md) {
+    font-size: var(--gos-text-6xl);
+  }
+
+  @include above(lg) {
+    font-size: var(--gos-text-7xl);
+  }
+}
+
+.hero-section__highlight {
+  background: linear-gradient(135deg, var(--gos-primary), var(--gos-accent));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-section__subtitle {
+  font-family: var(--gos-font-body);
+  font-size: var(--gos-text-lg);
+  line-height: var(--gos-leading-relaxed);
+  color: var(--gos-gray-400);
+  max-width: 560px;
+  margin-inline: auto;
+  margin-bottom: var(--gos-space-10);
+  animation: gos-fade-in-up 600ms ease 200ms both;
+
+  @include above(md) {
+    font-size: var(--gos-text-xl);
+  }
+}
+
+.hero-section__ctas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gos-space-4);
+  margin-bottom: var(--gos-space-16);
+  animation: gos-fade-in-up 600ms ease 300ms both;
+
+  @include above(sm) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.hero-section__cta-link {
+  text-decoration: none;
+
+  @include below(sm) {
+    width: 100%;
+
+    gos-button {
+      width: 100%;
+    }
+
+    ::ng-deep .gos-btn--full button,
+    ::ng-deep button {
+      width: 100%;
+    }
+  }
+}
+
+// Override outline button colors for dark background
+:host ::ng-deep .gos-btn--outline button {
+  color: var(--gos-white);
+  border-color: rgba(255, 255, 255, 0.3);
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.hero-section__stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--gos-space-12);
+  animation: gos-count-pulse 800ms ease 500ms both;
+
+  @include below(sm) {
+    gap: var(--gos-space-6);
+  }
+}
+
+.hero-section__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gos-space-1);
+}
+
+.hero-section__stat-value {
+  font-family: var(--gos-font-display);
+  font-size: var(--gos-text-3xl);
+  font-weight: var(--gos-weight-bold);
+  color: var(--gos-white);
+
+  @include above(md) {
+    font-size: var(--gos-text-4xl);
+  }
+}
+
+.hero-section__stat-label {
+  font-family: var(--gos-font-body);
+  font-size: var(--gos-text-sm);
+  color: var(--gos-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
