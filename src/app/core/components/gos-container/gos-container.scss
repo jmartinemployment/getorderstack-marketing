@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: var(--gos-container-max);
+  margin-inline: auto;
+  padding-inline: var(--gos-container-padding);
+}
+
+:host(.gos-container--narrow) {
+  max-width: var(--gos-container-narrow);
+}

@@ -1,0 +1,39 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :host-context(svg),
+  ::ng-deep svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+}
+
+:host(.gos-icon--sm) {
+  width: 16px;
+  height: 16px;
+}
+
+:host(.gos-icon--md) {
+  width: 20px;
+  height: 20px;
+}
+
+:host(.gos-icon--lg) {
+  width: 24px;
+  height: 24px;
+}
+
+:host(.gos-icon--xl) {
+  width: 32px;
+  height: 32px;
+}

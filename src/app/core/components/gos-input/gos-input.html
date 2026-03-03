@@ -1,0 +1,33 @@
+<div class="gos-input" [class.gos-input--error]="error()" [class.gos-input--disabled]="disabled() || isDisabled()">
+  @if (label()) {
+    <label class="gos-input__label" [attr.for]="inputId()">
+      {{ label() }}
+      @if (required()) {
+        <span class="gos-input__required" aria-hidden="true">*</span>
+      }
+    </label>
+  }
+
+  <input
+    class="gos-input__field"
+    [id]="inputId()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [value]="value()"
+    [disabled]="disabled() || isDisabled()"
+    [attr.aria-required]="required() || null"
+    [attr.aria-invalid]="error() ? true : null"
+    [attr.aria-describedby]="(hint() || error()) ? inputId() + '-hint' : null"
+    (input)="onInput($event)"
+    (blur)="onBlur()" />
+
+  @if (error()) {
+    <p class="gos-input__message gos-input__message--error" [id]="inputId() + '-hint'" role="alert">
+      {{ error() }}
+    </p>
+  } @else if (hint()) {
+    <p class="gos-input__message" [id]="inputId() + '-hint'">
+      {{ hint() }}
+    </p>
+  }
+</div>

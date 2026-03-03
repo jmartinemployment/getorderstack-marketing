@@ -1,0 +1,63 @@
+@keyframes gos-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gos-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gos-fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gos-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gos-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gos-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.gos-animate-fade-in {
+  animation: gos-fade-in var(--gos-transition-base) both;
+}
+
+.gos-animate-fade-in-up {
+  animation: gos-fade-in-up var(--gos-transition-slow) both;
+}
+
+.gos-animate-fade-in-down {
+  animation: gos-fade-in-down var(--gos-transition-slow) both;
+}
+
+.gos-animate-scale-in {
+  animation: gos-scale-in var(--gos-transition-base) both;
+}

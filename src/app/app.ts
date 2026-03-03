@@ -1,12 +1,26 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  GosButtonComponent,
+  GosCardComponent,
+  GosInputComponent,
+  GosBadgeComponent,
+  GosContainerComponent,
+  GosSectionHeaderComponent,
+} from './core/components';
 
 @Component({
   selector: 'gos-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    GosButtonComponent,
+    GosCardComponent,
+    GosInputComponent,
+    GosBadgeComponent,
+    GosContainerComponent,
+    GosSectionHeaderComponent,
+  ],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected readonly title = signal('getorderstack-marketing');
-}
+export class App {}

@@ -1,0 +1,53 @@
+:host {
+  display: inline-block;
+}
+
+.gos-badge__text {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--gos-radius-full);
+  font-weight: var(--gos-weight-medium);
+  white-space: nowrap;
+}
+
+// --- Sizes ---
+:host(.gos-badge--sm) .gos-badge__text {
+  padding: 2px var(--gos-space-2);
+  font-size: var(--gos-text-xs);
+}
+
+:host(.gos-badge--md) .gos-badge__text {
+  padding: var(--gos-space-1) var(--gos-space-3);
+  font-size: var(--gos-text-sm);
+}
+
+// --- Variants ---
+:host(.gos-badge--primary) .gos-badge__text {
+  background: var(--gos-primary-light);
+  color: var(--gos-primary);
+}
+
+:host(.gos-badge--secondary) .gos-badge__text {
+  background: var(--gos-gray-100);
+  color: var(--gos-gray-700);
+}
+
+:host(.gos-badge--success) .gos-badge__text {
+  background: var(--gos-success-light);
+  color: var(--gos-success);
+}
+
+:host(.gos-badge--warning) .gos-badge__text {
+  background: var(--gos-warning-light);
+  color: #996600;
+}
+
+:host(.gos-badge--danger) .gos-badge__text {
+  background: var(--gos-danger-light);
+  color: var(--gos-danger);
+}
+
+:host(.gos-badge--info) .gos-badge__text {
+  background: var(--gos-info-light);
+  color: var(--gos-info);
+}

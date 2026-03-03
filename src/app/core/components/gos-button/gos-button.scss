@@ -1,0 +1,125 @@
+@use 'styles/mixins' as *;
+
+:host {
+  display: block;
+}
+
+:host(.gos-btn--full) button {
+  width: 100%;
+}
+
+button {
+  @include interactive;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gos-space-2);
+  border-radius: var(--gos-radius-md);
+  font-family: var(--gos-font-body);
+  font-weight: var(--gos-weight-semibold);
+  white-space: nowrap;
+  position: relative;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// --- Sizes ---
+:host(.gos-btn--sm) button {
+  padding: var(--gos-space-2) var(--gos-space-4);
+  font-size: var(--gos-text-sm);
+  min-height: 36px;
+}
+
+:host(.gos-btn--md) button {
+  padding: var(--gos-space-3) var(--gos-space-6);
+  font-size: var(--gos-text-base);
+  min-height: 44px;
+}
+
+:host(.gos-btn--lg) button {
+  padding: var(--gos-space-4) var(--gos-space-8);
+  font-size: var(--gos-text-lg);
+  min-height: 52px;
+}
+
+// --- Variants ---
+:host(.gos-btn--primary) button {
+  background: var(--gos-primary);
+  color: var(--gos-white);
+
+  &:hover:not(:disabled) {
+    background: var(--gos-primary-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--gos-primary-active);
+  }
+}
+
+:host(.gos-btn--secondary) button {
+  background: var(--gos-secondary);
+  color: var(--gos-white);
+
+  &:hover:not(:disabled) {
+    background: var(--gos-secondary-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--gos-secondary-active);
+  }
+}
+
+:host(.gos-btn--outline) button {
+  background: transparent;
+  color: var(--gos-primary);
+  border: 1.5px solid var(--gos-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--gos-primary-light);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--gos-primary);
+    color: var(--gos-white);
+  }
+}
+
+:host(.gos-btn--ghost) button {
+  background: transparent;
+  color: var(--gos-gray-700);
+
+  &:hover:not(:disabled) {
+    background: var(--gos-gray-100);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--gos-gray-200);
+  }
+}
+
+:host(.gos-btn--danger) button {
+  background: var(--gos-danger);
+  color: var(--gos-white);
+
+  &:hover:not(:disabled) {
+    background: var(--gos-danger-hover);
+  }
+}
+
+// --- Spinner ---
+.gos-btn__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: gos-spin 600ms linear infinite;
+  position: absolute;
+}
+
+.gos-btn__content--hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,12 @@
+<button
+  [type]="type()"
+  [disabled]="disabled() || loading()"
+  [attr.aria-busy]="loading() || null"
+  (click)="onClick($event)">
+  @if (loading()) {
+    <span class="gos-btn__spinner" aria-hidden="true"></span>
+  }
+  <span class="gos-btn__content" [class.gos-btn__content--hidden]="loading()">
+    <ng-content />
+  </span>
+</button>

@@ -1,0 +1,116 @@
+:root {
+  // --- Brand Colors ---
+  --gos-primary: #006aff;
+  --gos-primary-hover: #0055d4;
+  --gos-primary-active: #004ab8;
+  --gos-primary-light: #e6f0ff;
+
+  --gos-secondary: #1a1a2e;
+  --gos-secondary-hover: #2d2d44;
+  --gos-secondary-active: #12121f;
+
+  --gos-accent: #00c2a8;
+  --gos-accent-hover: #00a892;
+  --gos-accent-light: #e6faf7;
+
+  // --- Neutrals ---
+  --gos-white: #ffffff;
+  --gos-gray-50: #f8f9fa;
+  --gos-gray-100: #f1f3f5;
+  --gos-gray-200: #e9ecef;
+  --gos-gray-300: #dee2e6;
+  --gos-gray-400: #ced4da;
+  --gos-gray-500: #adb5bd;
+  --gos-gray-600: #868e96;
+  --gos-gray-700: #495057;
+  --gos-gray-800: #343a40;
+  --gos-gray-900: #212529;
+  --gos-black: #0a0a0a;
+
+  // --- Semantic Colors ---
+  --gos-success: #00a854;
+  --gos-success-light: #e6f7ef;
+  --gos-warning: #faad14;
+  --gos-warning-light: #fff8e6;
+  --gos-danger: #e5383b;
+  --gos-danger-hover: #c62828;
+  --gos-danger-light: #fde8e8;
+  --gos-info: #006aff;
+  --gos-info-light: #e6f0ff;
+
+  // --- Typography ---
+  --gos-font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --gos-font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --gos-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --gos-text-xs: 0.75rem;
+  --gos-text-sm: 0.875rem;
+  --gos-text-base: 1rem;
+  --gos-text-lg: 1.125rem;
+  --gos-text-xl: 1.25rem;
+  --gos-text-2xl: 1.5rem;
+  --gos-text-3xl: 1.875rem;
+  --gos-text-4xl: 2.25rem;
+  --gos-text-5xl: 3rem;
+  --gos-text-6xl: 3.75rem;
+
+  --gos-leading-tight: 1.15;
+  --gos-leading-snug: 1.3;
+  --gos-leading-normal: 1.5;
+  --gos-leading-relaxed: 1.7;
+
+  --gos-weight-regular: 400;
+  --gos-weight-medium: 500;
+  --gos-weight-semibold: 600;
+  --gos-weight-bold: 700;
+  --gos-weight-extrabold: 800;
+
+  // --- Spacing ---
+  --gos-space-1: 0.25rem;
+  --gos-space-2: 0.5rem;
+  --gos-space-3: 0.75rem;
+  --gos-space-4: 1rem;
+  --gos-space-5: 1.25rem;
+  --gos-space-6: 1.5rem;
+  --gos-space-8: 2rem;
+  --gos-space-10: 2.5rem;
+  --gos-space-12: 3rem;
+  --gos-space-16: 4rem;
+  --gos-space-20: 5rem;
+  --gos-space-24: 6rem;
+  --gos-space-32: 8rem;
+
+  // --- Borders ---
+  --gos-radius-sm: 6px;
+  --gos-radius-md: 10px;
+  --gos-radius-lg: 16px;
+  --gos-radius-xl: 24px;
+  --gos-radius-full: 9999px;
+
+  --gos-border-color: var(--gos-gray-200);
+  --gos-border: 1px solid var(--gos-border-color);
+
+  // --- Shadows ---
+  --gos-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --gos-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --gos-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --gos-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.06), 0 4px 6px rgba(0, 0, 0, 0.04);
+  --gos-shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.08), 0 8px 10px rgba(0, 0, 0, 0.04);
+
+  // --- Layout ---
+  --gos-container-max: 1200px;
+  --gos-container-narrow: 800px;
+  --gos-container-padding: var(--gos-space-6);
+
+  // --- Transitions ---
+  --gos-transition-fast: 150ms ease;
+  --gos-transition-base: 250ms ease;
+  --gos-transition-slow: 400ms ease;
+
+  // --- Z-Index ---
+  --gos-z-dropdown: 100;
+  --gos-z-sticky: 200;
+  --gos-z-overlay: 300;
+  --gos-z-modal: 400;
+  --gos-z-toast: 500;
+}

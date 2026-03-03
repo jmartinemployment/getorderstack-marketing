@@ -1,0 +1,53 @@
+@use 'styles/mixins' as *;
+
+:host {
+  display: block;
+  border-radius: var(--gos-radius-lg);
+  overflow: hidden;
+}
+
+// --- Variants ---
+:host(.gos-card--elevated) {
+  background: var(--gos-white);
+  box-shadow: var(--gos-shadow-sm);
+}
+
+:host(.gos-card--outlined) {
+  background: var(--gos-white);
+  border: var(--gos-border);
+}
+
+:host(.gos-card--flat) {
+  background: var(--gos-gray-50);
+}
+
+// --- Interactive ---
+:host(.gos-card--hoverable) {
+  @include hover-lift;
+}
+
+:host(.gos-card--clickable) {
+  @include interactive;
+  @include hover-lift;
+}
+
+// --- Slots ---
+.gos-card__header {
+  padding: var(--gos-space-6) var(--gos-space-6) 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.gos-card__body {
+  padding: var(--gos-space-6);
+}
+
+.gos-card__footer {
+  padding: 0 var(--gos-space-6) var(--gos-space-6);
+
+  &:empty {
+    display: none;
+  }
+}
