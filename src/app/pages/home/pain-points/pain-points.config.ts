@@ -73,8 +73,7 @@ export const PAIN_POINTS_DEFAULT: PainPointsConfig = {
   ],
   bridge: {
     headline: 'There\u2019s a better way.',
-    subtext:
-      'What if your POS charged zero delivery commissions, worked on your existing devices, and took minutes to set up?',
+    subtext: 'What if your POS charged zero delivery commissions, worked on your existing devices, and took minutes to set up?',
     ctaLabel: 'See How GetOrderStack Is Different',
     ctaRoute: '/features',
     ctaAriaLabel: 'See GetOrderStack features that solve these problems',

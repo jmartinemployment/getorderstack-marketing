@@ -32,9 +32,10 @@
 
   .pain-card--error & { background: var(--gos-danger-light); }
   .pain-card--warning & { background: var(--gos-warning-light); }
-  .pain-card--primary & { background: var(--gos-primary-light); }
+  .pain-card--primary & { background: var(--gos-primary-subtle); }
 }
 
+// CSS Icons
 .pain-card__icon {
   width: 48px;
   height: 48px;
@@ -53,7 +54,6 @@
       align-items: center;
       justify-content: center;
     }
-
     &::after {
       content: '';
       position: absolute;
@@ -80,7 +80,6 @@
       border-radius: 10px 10px 0 0;
       transform: translateX(-50%);
     }
-
     &::after {
       content: '';
       position: absolute;
@@ -106,7 +105,6 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
     }
-
     &::after {
       content: '';
       position: absolute;
@@ -128,7 +126,6 @@
       border: 3px solid var(--gos-primary);
       border-radius: 50%;
     }
-
     &::after {
       content: '';
       position: absolute;
@@ -176,7 +173,7 @@
   font-family: var(--gos-font-display);
   font-size: var(--gos-text-lg);
   font-weight: var(--gos-weight-bold);
-  color: var(--gos-secondary);
+  color: var(--gos-gray-900);
   line-height: var(--gos-leading-snug);
   margin-bottom: var(--gos-space-3);
 

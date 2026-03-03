@@ -1,37 +1,37 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { PLATFORM_ID } from '@angular/core';
 import { PainPointsSectionComponent } from './pain-points-section';
 import { PAIN_POINTS_DEFAULT } from '../pain-points.config';
 
 // Mock IntersectionObserver for scroll reveal directive
 class MockIntersectionObserver {
-  constructor(private callback: IntersectionObserverCallback) {
-    // Immediately trigger reveal for all observed elements
-    setTimeout(() => {
-      this.callback(
-        [{ isIntersecting: true } as IntersectionObserverEntry],
-        this as unknown as IntersectionObserver,
-      );
-    });
+  constructor(private callback: IntersectionObserverCallback) {}
+  observe(el: Element): void {
+    // Immediately trigger reveal for tests
+    this.callback(
+      [{ isIntersecting: true, target: el } as IntersectionObserverEntry],
+      this as unknown as IntersectionObserver,
+    );
   }
-  observe = vi.fn();
-  disconnect = vi.fn();
-  unobserve = vi.fn();
+  unobserve(): void {}
+  disconnect(): void {}
+  takeRecords(): IntersectionObserverEntry[] { return []; }
+  get root(): Element | null { return null; }
+  get rootMargin(): string { return ''; }
+  get thresholds(): readonly number[] { return []; }
 }
 
 describe('PainPointsSectionComponent', () => {
   let fixture: ComponentFixture<PainPointsSectionComponent>;
   let el: HTMLElement;
-  let originalIO: typeof IntersectionObserver;
 
   beforeEach(async () => {
-    originalIO = globalThis.IntersectionObserver;
-    globalThis.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
+    (globalThis as Record<string, unknown>)['IntersectionObserver'] = MockIntersectionObserver;
 
     await TestBed.configureTestingModule({
       imports: [PainPointsSectionComponent],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(PainPointsSectionComponent);
@@ -40,24 +40,19 @@ describe('PainPointsSectionComponent', () => {
   });
 
   afterEach(() => {
-    globalThis.IntersectionObserver = originalIO;
+    delete (globalThis as Record<string, unknown>)['IntersectionObserver'];
   });
 
   it('should create', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should have section with id="problems"', () => {
+  it('should render section with id="problems"', () => {
     const section = el.querySelector('#problems');
     expect(section).toBeTruthy();
   });
 
-  it('should have aria-labelledby on section', () => {
-    const section = el.querySelector('section');
-    expect(section?.getAttribute('aria-labelledby')).toBe('pain-points-heading');
-  });
-
-  it('should render section header', () => {
+  it('should render section header with eyebrow', () => {
     const header = el.querySelector('gos-section-header');
     expect(header).toBeTruthy();
   });
@@ -72,15 +67,13 @@ describe('PainPointsSectionComponent', () => {
     expect(bridge).toBeTruthy();
   });
 
-  it('should apply scroll reveal directive to header', () => {
-    const header = el.querySelector('.pain-points__header[goscrollreveal],.pain-points__header[gosscrollreveal]');
-    // Check for the attribute in a case-insensitive way
-    const headerDiv = el.querySelector('.pain-points__header');
-    expect(headerDiv).toBeTruthy();
+  it('should have aria-labelledby on section', () => {
+    const section = el.querySelector('section');
+    expect(section?.getAttribute('aria-labelledby')).toBe('pain-points-heading');
   });
 
-  it('should apply scroll reveal with stagger to cards', () => {
+  it('should use scroll reveal directive on card wrappers', () => {
     const wrappers = el.querySelectorAll('.pain-points__card-wrapper');
-    expect(wrappers.length).toBe(4);
+    expect(wrappers.length).toBe(PAIN_POINTS_DEFAULT.painPoints.length);
   });
 });

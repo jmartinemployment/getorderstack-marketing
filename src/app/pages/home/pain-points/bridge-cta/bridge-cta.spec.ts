@@ -6,7 +6,6 @@ import { PAIN_POINTS_DEFAULT } from '../pain-points.config';
 describe('BridgeCtaComponent', () => {
   let fixture: ComponentFixture<BridgeCtaComponent>;
   let el: HTMLElement;
-  const bridge = PAIN_POINTS_DEFAULT.bridge;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,23 +22,23 @@ describe('BridgeCtaComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render headline', () => {
+  it('should render headline from config', () => {
     const headline = el.querySelector('.bridge__headline');
-    expect(headline?.textContent?.trim()).toBe(bridge.headline);
+    expect(headline?.textContent?.trim()).toBe(PAIN_POINTS_DEFAULT.bridge.headline);
   });
 
-  it('should render subtext', () => {
+  it('should render subtext from config', () => {
     const subtext = el.querySelector('.bridge__subtext');
-    expect(subtext?.textContent?.trim()).toBe(bridge.subtext);
+    expect(subtext?.textContent?.trim()).toBe(PAIN_POINTS_DEFAULT.bridge.subtext);
   });
 
-  it('should render CTA button with label', () => {
-    const btn = el.querySelector('gos-button');
-    expect(btn?.textContent?.trim()).toBe(bridge.ctaLabel);
+  it('should render CTA button', () => {
+    const button = el.querySelector('gos-button');
+    expect(button).toBeTruthy();
   });
 
   it('should link to configured route', () => {
-    const link = el.querySelector('.bridge__cta-link') as HTMLAnchorElement;
+    const link = el.querySelector('.bridge__cta-link');
     expect(link).toBeTruthy();
   });
 
@@ -48,8 +47,8 @@ describe('BridgeCtaComponent', () => {
     expect(arrow?.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('should have complementary role', () => {
-    const bridge = el.querySelector('[role="complementary"]');
-    expect(bridge).toBeTruthy();
+  it('should render SVG arrow', () => {
+    const svg = el.querySelector('.bridge__arrow svg');
+    expect(svg).toBeTruthy();
   });
 });

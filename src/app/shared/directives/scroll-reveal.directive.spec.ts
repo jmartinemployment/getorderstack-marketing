@@ -1,12 +1,28 @@
 import { Component } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PLATFORM_ID } from '@angular/core';
+import { vi } from 'vitest';
 import { ScrollRevealDirective } from './scroll-reveal.directive';
 
-let observerCallback: IntersectionObserverCallback;
-let observerDisconnect: ReturnType<typeof vi.fn>;
+let intersectionCallback: IntersectionObserverCallback;
+let disconnected = false;
+
+class MockIntersectionObserver {
+  constructor(callback: IntersectionObserverCallback, public options?: IntersectionObserverInit) {
+    intersectionCallback = callback;
+    disconnected = false;
+  }
+  observe(): void {}
+  unobserve(): void {}
+  disconnect(): void { disconnected = true; }
+  takeRecords(): IntersectionObserverEntry[] { return []; }
+  get root(): Element | null { return null; }
+  get rootMargin(): string { return ''; }
+  get thresholds(): readonly number[] { return []; }
+}
 
 function triggerIntersection(isIntersecting: boolean): void {
-  observerCallback(
+  intersectionCallback(
     [{ isIntersecting } as IntersectionObserverEntry],
     {} as IntersectionObserver,
   );
@@ -15,105 +31,107 @@ function triggerIntersection(isIntersecting: boolean): void {
 @Component({
   standalone: true,
   imports: [ScrollRevealDirective],
-  template: `<div gosScrollReveal id="target">Content</div>`,
+  template: '<div gosScrollReveal>test</div>',
 })
 class TestHostComponent {}
 
 @Component({
   standalone: true,
   imports: [ScrollRevealDirective],
-  template: `<div gosScrollReveal [gosScrollRevealDelay]="200" id="delayed">Content</div>`,
+  template: '<div gosScrollReveal [gosScrollRevealDelay]="200">delayed</div>',
 })
 class DelayedHostComponent {}
 
 @Component({
   standalone: true,
   imports: [ScrollRevealDirective],
-  template: `<div gosScrollReveal [gosScrollRevealOnce]="false" id="toggle">Content</div>`,
+  template: '<div gosScrollReveal [gosScrollRevealOnce]="false">toggle</div>',
 })
 class ToggleHostComponent {}
 
 describe('ScrollRevealDirective', () => {
-  let originalIO: typeof IntersectionObserver | undefined;
-
   beforeEach(() => {
-    originalIO = globalThis.IntersectionObserver;
-    observerDisconnect = vi.fn();
-
-    globalThis.IntersectionObserver = class {
-      constructor(callback: IntersectionObserverCallback) {
-        observerCallback = callback;
-      }
-      observe = vi.fn();
-      disconnect = observerDisconnect;
-      unobserve = vi.fn();
-      root = null;
-      rootMargin = '';
-      thresholds = [] as number[];
-      takeRecords = () => [] as IntersectionObserverEntry[];
-    } as unknown as typeof IntersectionObserver;
+    (globalThis as Record<string, unknown>)['IntersectionObserver'] = MockIntersectionObserver;
+    disconnected = false;
   });
 
   afterEach(() => {
-    if (originalIO) {
-      globalThis.IntersectionObserver = originalIO;
-    }
+    delete (globalThis as Record<string, unknown>)['IntersectionObserver'];
+    vi.useRealTimers();
   });
 
   it('should add is-revealed class when element enters viewport', () => {
-    const fixture = TestBed.createComponent(TestHostComponent);
+    const fixture = TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+    }).createComponent(TestHostComponent);
     fixture.detectChanges();
 
-    const el = fixture.nativeElement.querySelector('#target') as HTMLElement;
-    expect(el.classList.contains('is-revealed')).toBe(false);
+    const div = fixture.nativeElement.querySelector('div');
+    expect(div.classList.contains('is-revealed')).toBe(false);
 
     triggerIntersection(true);
-    expect(el.classList.contains('is-revealed')).toBe(true);
+    expect(div.classList.contains('is-revealed')).toBe(true);
   });
 
-  it('should disconnect observer after reveal when once is true', () => {
-    const fixture = TestBed.createComponent(TestHostComponent);
+  it('should disconnect observer after reveal with once=true (default)', () => {
+    const fixture = TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+    }).createComponent(TestHostComponent);
     fixture.detectChanges();
 
     triggerIntersection(true);
-    expect(observerDisconnect).toHaveBeenCalled();
+    expect(disconnected).toBe(true);
   });
 
   it('should respect delay input', () => {
     vi.useFakeTimers();
 
-    const fixture = TestBed.createComponent(DelayedHostComponent);
+    const fixture = TestBed.configureTestingModule({
+      imports: [DelayedHostComponent],
+    }).createComponent(DelayedHostComponent);
     fixture.detectChanges();
 
-    const el = fixture.nativeElement.querySelector('#delayed') as HTMLElement;
-
+    const div = fixture.nativeElement.querySelector('div');
     triggerIntersection(true);
-    expect(el.classList.contains('is-revealed')).toBe(false);
+    expect(div.classList.contains('is-revealed')).toBe(false);
 
     vi.advanceTimersByTime(200);
-    expect(el.classList.contains('is-revealed')).toBe(true);
-
-    vi.useRealTimers();
+    expect(div.classList.contains('is-revealed')).toBe(true);
   });
 
-  it('should toggle class when once is false', () => {
-    const fixture = TestBed.createComponent(ToggleHostComponent);
+  it('should toggle class with once=false', () => {
+    const fixture = TestBed.configureTestingModule({
+      imports: [ToggleHostComponent],
+    }).createComponent(ToggleHostComponent);
     fixture.detectChanges();
 
-    const el = fixture.nativeElement.querySelector('#toggle') as HTMLElement;
-
+    const div = fixture.nativeElement.querySelector('div');
     triggerIntersection(true);
-    expect(el.classList.contains('is-revealed')).toBe(true);
+    expect(div.classList.contains('is-revealed')).toBe(true);
 
     triggerIntersection(false);
-    expect(el.classList.contains('is-revealed')).toBe(false);
+    expect(div.classList.contains('is-revealed')).toBe(false);
   });
 
-  it('should not disconnect when once is false', () => {
-    const fixture = TestBed.createComponent(ToggleHostComponent);
+  it('should not disconnect observer with once=false', () => {
+    const fixture = TestBed.configureTestingModule({
+      imports: [ToggleHostComponent],
+    }).createComponent(ToggleHostComponent);
     fixture.detectChanges();
 
     triggerIntersection(true);
-    expect(observerDisconnect).not.toHaveBeenCalled();
+    expect(disconnected).toBe(false);
+  });
+
+  it('should add class immediately on SSR', () => {
+    TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+      providers: [{ provide: PLATFORM_ID, useValue: 'server' }],
+    });
+    const fixture = TestBed.createComponent(TestHostComponent);
+    fixture.detectChanges();
+
+    const div = fixture.nativeElement.querySelector('div');
+    expect(div.classList.contains('is-revealed')).toBe(true);
   });
 });

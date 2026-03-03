@@ -7,6 +7,7 @@ import {
   inject,
   PLATFORM_ID,
   input,
+  computed,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -15,29 +16,27 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
 })
 export class ScrollRevealDirective implements OnInit, OnDestroy {
-  readonly revealClass = input<string>('is-revealed', { alias: 'gosScrollReveal' });
+  readonly rawRevealClass = input<string>('', { alias: 'gosScrollReveal' });
   readonly threshold = input<number>(0.15, { alias: 'gosScrollRevealThreshold' });
   readonly delay = input<number>(0, { alias: 'gosScrollRevealDelay' });
   readonly once = input<boolean>(true, { alias: 'gosScrollRevealOnce' });
 
+  readonly revealClass = computed(() => this.rawRevealClass() || 'is-revealed');
+
   private readonly el = inject(ElementRef<HTMLElement>);
   private readonly renderer = inject(Renderer2);
   private readonly platformId = inject(PLATFORM_ID);
-
   private observer?: IntersectionObserver;
-
-  private getRevealClass(): string {
-    return this.revealClass() || 'is-revealed';
-  }
+  private timeoutId?: ReturnType<typeof setTimeout>;
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
-      this.renderer.addClass(this.el.nativeElement, this.getRevealClass());
+      this.renderer.addClass(this.el.nativeElement, this.revealClass());
       return;
     }
 
     if (typeof IntersectionObserver === 'undefined') {
-      this.renderer.addClass(this.el.nativeElement, this.getRevealClass());
+      this.renderer.addClass(this.el.nativeElement, this.revealClass());
       return;
     }
 
@@ -46,7 +45,7 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
         if (entry.isIntersecting) {
           const delayMs = this.delay();
           if (delayMs > 0) {
-            setTimeout(() => this.reveal(), delayMs);
+            this.timeoutId = setTimeout(() => this.reveal(), delayMs);
           } else {
             this.reveal();
           }
@@ -55,7 +54,7 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
             this.observer?.disconnect();
           }
         } else if (!this.once()) {
-          this.renderer.removeClass(this.el.nativeElement, this.getRevealClass());
+          this.renderer.removeClass(this.el.nativeElement, this.revealClass());
         }
       },
       { threshold: this.threshold() },
@@ -66,9 +65,12 @@ export class ScrollRevealDirective implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.observer?.disconnect();
+    if (this.timeoutId !== undefined) {
+      clearTimeout(this.timeoutId);
+    }
   }
 
   private reveal(): void {
-    this.renderer.addClass(this.el.nativeElement, this.getRevealClass());
+    this.renderer.addClass(this.el.nativeElement, this.revealClass());
   }
 }

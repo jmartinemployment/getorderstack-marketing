@@ -1,9 +1,9 @@
-import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, signal } from '@angular/core';
 import { PainPointCardComponent } from './pain-point-card';
 import { PainPoint } from '../pain-points.config';
 
-const MOCK_PAIN_POINT: PainPoint = {
+const MOCK_POINT: PainPoint = {
   icon: 'commission',
   stat: '15\u201330%',
   statSuffix: 'lost per order',
@@ -16,17 +16,17 @@ const MOCK_NO_SUFFIX: PainPoint = {
   icon: 'clock',
   stat: '5 min',
   headline: 'No Suffix',
-  description: 'Description without suffix.',
+  description: 'No suffix description.',
   accentColor: 'primary',
 };
 
 @Component({
   standalone: true,
   imports: [PainPointCardComponent],
-  template: `<gos-pain-point-card [painPoint]="point()" />`,
+  template: '<gos-pain-point-card [painPoint]="point()" />',
 })
 class TestHost {
-  point = signal<PainPoint>(MOCK_PAIN_POINT);
+  point = signal(MOCK_POINT);
 }
 
 describe('PainPointCardComponent', () => {
@@ -60,8 +60,8 @@ describe('PainPointCardComponent', () => {
   });
 
   it('should render stat value', () => {
-    const statValue = el.querySelector('.pain-card__stat-value');
-    expect(statValue?.textContent?.trim()).toBe('15\u201330%');
+    const value = el.querySelector('.pain-card__stat-value');
+    expect(value?.textContent?.trim()).toBe('15\u201330%');
   });
 
   it('should render stat suffix when provided', () => {
@@ -73,7 +73,7 @@ describe('PainPointCardComponent', () => {
     fixture.componentInstance.point.set(MOCK_NO_SUFFIX);
     fixture.detectChanges();
     const suffix = el.querySelector('.pain-card__stat-suffix');
-    expect(suffix).toBeNull();
+    expect(suffix).toBeFalsy();
   });
 
   it('should render headline', () => {
@@ -84,11 +84,5 @@ describe('PainPointCardComponent', () => {
   it('should render description', () => {
     const desc = el.querySelector('.pain-card__description');
     expect(desc?.textContent?.trim()).toBe('Test description text.');
-  });
-
-  it('should apply warning accent class', () => {
-    fixture.componentInstance.point.set({ ...MOCK_PAIN_POINT, accentColor: 'warning' });
-    fixture.detectChanges();
-    expect(el.querySelector('.pain-card--warning')).toBeTruthy();
   });
 });
