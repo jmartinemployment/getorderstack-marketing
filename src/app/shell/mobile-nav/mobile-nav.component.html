@@ -1,0 +1,42 @@
+@if (isOpen()) {
+  <div
+    class="mobile-nav"
+    role="dialog"
+    aria-modal="true"
+    id="mobile-nav"
+    aria-label="Navigation menu">
+
+    <div class="mobile-nav__overlay" aria-hidden="true" (click)="onOverlayClick()"></div>
+
+    <div class="mobile-nav__drawer">
+      <nav aria-label="Mobile navigation">
+        <ul class="mobile-nav__list">
+          @for (item of navItems(); track item.route) {
+            <li>
+              <a
+                class="mobile-nav__link"
+                [routerLink]="item.route"
+                routerLinkActive="mobile-nav__link--active"
+                [routerLinkActiveOptions]="{ exact: item.route === '/' }"
+                (click)="onNavClick()">
+                {{ item.label }}
+              </a>
+            </li>
+          }
+        </ul>
+
+        <div class="mobile-nav__divider"></div>
+
+        <div class="mobile-nav__cta">
+          <gos-button
+            variant="primary"
+            [fullWidth]="true"
+            [routerLink]="cta().route"
+            (click)="onNavClick()">
+            {{ cta().label }}
+          </gos-button>
+        </div>
+      </nav>
+    </div>
+  </div>
+}

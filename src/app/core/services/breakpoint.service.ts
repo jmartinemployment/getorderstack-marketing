@@ -21,6 +21,7 @@ export class BreakpointService implements OnDestroy {
   }
 
   private watch(query: string, target: ReturnType<typeof signal<boolean>>): void {
+    if (typeof window.matchMedia !== 'function') return;
     const mql = window.matchMedia(query);
     target.set(mql.matches);
 

@@ -1,0 +1,18 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout__content {
+  flex: 1;
+}
+
+.layout__footer-placeholder {
+  padding: var(--gos-space-8) 0;
+  background: var(--gos-gray-50);
+  color: var(--gos-gray-600);
+  font-size: var(--gos-text-sm);
+  text-align: center;
+}

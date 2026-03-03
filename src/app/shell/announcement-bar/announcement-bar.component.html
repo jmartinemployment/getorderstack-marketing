@@ -1,0 +1,21 @@
+@if (!isDismissed()) {
+  <div class="announcement" role="banner">
+    <div class="announcement__content">
+      <p class="announcement__text">
+        {{ config().message }}
+        @if (config().linkText && config().linkRoute) {
+          <a class="announcement__link" [routerLink]="config().linkRoute">{{ config().linkText }}</a>
+        }
+      </p>
+    </div>
+    @if (config().dismissible) {
+      <button
+        class="announcement__close"
+        type="button"
+        aria-label="Dismiss announcement"
+        (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    }
+  </div>
+}

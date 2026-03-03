@@ -28,8 +28,22 @@ src/
 │   │   ├── components/       # 7 base components + barrel index.ts
 │   │   ├── models/           # Shared types (types.ts)
 │   │   └── services/         # breakpoint.service.ts
-│   ├── shell/                # Header, footer, layout (C-02)
-│   ├── pages/                # Page components (C-03+)
+│   ├── shell/                # App shell (C-02)
+│   │   ├── header/           # Scroll-aware sticky header (IntersectionObserver)
+│   │   ├── mobile-nav/       # Slide-out drawer with focus trap + scroll lock
+│   │   ├── announcement-bar/ # Dismissible promo banner
+│   │   ├── layout/           # Root layout with router-outlet and scroll sentinel
+│   │   ├── scroll.service.ts # Scroll lock, smooth anchor scroll, scroll-to-top
+│   │   ├── nav.model.ts      # NavItem[], NAV_CTA, AnnouncementConfig
+│   │   └── index.ts          # Barrel exports
+│   ├── pages/                # Lazy-loaded page components
+│   │   ├── home/             # Dark hero page (transparent header)
+│   │   ├── features/         # Placeholder (C-05)
+│   │   ├── pricing/          # Placeholder (C-06)
+│   │   ├── demo/             # Placeholder (C-07)
+│   │   ├── integrations/     # Placeholder (C-09)
+│   │   ├── blog/             # Placeholder
+│   │   └── get-started/      # Placeholder (C-11)
 │   └── shared/               # Shared utilities (C-11)
 ├── environments/             # Dev + prod configs
 ├── styles/
@@ -80,8 +94,8 @@ ng build                    # Production build
 
 ## Component Roadmap (C-01 through C-13)
 
-- **C-01** — Scaffold & Design System (this step)
-- **C-02** — Shell (header, footer, mobile nav)
+- **C-01** — Scaffold & Design System (done)
+- **C-02** — Shell (header, mobile nav, announcement bar, layout) (done)
 - **C-03** — Hero section
 - **C-04** — Features showcase
 - **C-05** — Pricing section
@@ -105,4 +119,18 @@ ng build                    # Production build
 - Showcase route renders all component variants
 - Added zoneless change detection, HttpClient with fetch
 - Path aliases: @core/*, @environments/*
-- Next: C-02 (shell — header, footer, mobile nav)
+
+**March 3, 2026 (C-02):**
+- Built app shell: HeaderComponent, MobileNavComponent, AnnouncementBarComponent, LayoutComponent
+- Header: scroll-aware via IntersectionObserver (not scroll events), transparent→solid transition
+- Mobile nav: slide-out drawer, focus trap, scroll lock via ScrollService, Escape to close
+- Announcement bar: dismissible promo banner with signal state
+- Layout: root wrapper with router-outlet, scroll sentinel, announcement visibility coordination
+- ScrollService: lockScroll/scrollToTop/scrollToElement with SSR guards
+- 7 lazy-loaded routes with placeholder pages (home, features, pricing, demo, integrations, blog, get-started)
+- Route preloading via PreloadAllModules, scroll restoration via withInMemoryScrolling
+- Added --gos-z-header token (300), renumbered z-index scale
+- Fixed BreakpointService: guard against missing matchMedia in jsdom tests
+- 55 tests across 12 spec files, all passing
+- Root component now renders LayoutComponent (replaced C-01 showcase)
+- Next: C-03 (hero section)

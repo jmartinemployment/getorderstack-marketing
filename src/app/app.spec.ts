@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { App } from './app';
 
@@ -8,7 +9,7 @@ describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
-      providers: [provideHttpClient()],
+      providers: [provideRouter([]), provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(App);
@@ -19,8 +20,8 @@ describe('App', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render the showcase heading', () => {
-    const heading = fixture.nativeElement.querySelector('.showcase__heading');
-    expect(heading?.textContent).toContain('Buttons');
+  it('should render the layout component', () => {
+    const layout = fixture.nativeElement.querySelector('gos-layout');
+    expect(layout).toBeTruthy();
   });
 });

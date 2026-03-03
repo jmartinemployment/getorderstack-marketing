@@ -1,0 +1,21 @@
+@if (announcementVisible()) {
+  <gos-announcement-bar
+    [config]="announcement"
+    (dismissed)="onAnnouncementDismissed()" />
+}
+
+<gos-header
+  [transparent]="isHeroPage()"
+  [announcementVisible]="announcementVisible()" />
+
+<div id="scroll-sentinel" aria-hidden="true" style="height: 1px; margin-top: -1px;"></div>
+
+<main id="main-content" class="layout__content">
+  <router-outlet />
+</main>
+
+<footer class="layout__footer-placeholder">
+  <gos-container>
+    <p>&copy; 2026 GetOrderStack. All rights reserved.</p>
+  </gos-container>
+</footer>
