@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { HomeComponent } from './home.component';
+import { FeaturesComponent } from './features.component';
 
 class MockIntersectionObserver {
   constructor(private callback: IntersectionObserverCallback) {}
@@ -19,19 +19,19 @@ class MockIntersectionObserver {
   get thresholds(): readonly number[] { return []; }
 }
 
-describe('HomeComponent', () => {
-  let fixture: ComponentFixture<HomeComponent>;
+describe('FeaturesComponent', () => {
+  let fixture: ComponentFixture<FeaturesComponent>;
   let el: HTMLElement;
 
   beforeEach(async () => {
     (globalThis as Record<string, unknown>)['IntersectionObserver'] = MockIntersectionObserver;
 
     await TestBed.configureTestingModule({
-      imports: [HomeComponent],
+      imports: [FeaturesComponent],
       providers: [provideRouter([]), provideHttpClient()],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(FeaturesComponent);
     fixture.detectChanges();
     el = fixture.nativeElement;
   });
@@ -44,27 +44,21 @@ describe('HomeComponent', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should render hero background', () => {
-    expect(el.querySelector('gos-hero-background')).toBeTruthy();
-  });
-
-  it('should render hero section', () => {
-    expect(el.querySelector('gos-hero-section')).toBeTruthy();
-  });
-
-  it('should render product mockup', () => {
-    expect(el.querySelector('gos-product-mockup')).toBeTruthy();
-  });
-
-  it('should render trust strip', () => {
-    expect(el.querySelector('gos-trust-strip')).toBeTruthy();
-  });
-
-  it('should render pain points section', () => {
-    expect(el.querySelector('gos-pain-points-section')).toBeTruthy();
+  it('should render page hero with section header', () => {
+    const headers = el.querySelectorAll('gos-section-header');
+    expect(headers.length).toBeGreaterThanOrEqual(1);
   });
 
   it('should render feature showcase section', () => {
     expect(el.querySelector('gos-feature-showcase-section')).toBeTruthy();
+  });
+
+  it('should render feature tab nav on features page', () => {
+    expect(el.querySelector('gos-feature-tab-nav')).toBeTruthy();
+  });
+
+  it('should render 7 feature modules', () => {
+    const modules = el.querySelectorAll('gos-feature-module');
+    expect(modules.length).toBe(7);
   });
 });

@@ -1,0 +1,49 @@
+<article
+  class="feature-module"
+  [class.feature-module--reversed]="reversed()"
+  [id]="'feature-' + feature().id"
+  [attr.aria-labelledby]="'feature-title-' + feature().id"
+  gosScrollReveal
+  [gosScrollRevealDelay]="0">
+
+  <div class="feature-module__content">
+    <gos-badge [variant]="badgeVariant()" size="sm">
+      {{ feature().tag }}
+    </gos-badge>
+
+    <h3 [id]="'feature-title-' + feature().id" class="feature-module__title">
+      {{ feature().title }}
+    </h3>
+
+    <p class="feature-module__description">
+      {{ feature().description }}
+    </p>
+
+    <ul class="feature-module__bullets">
+      @for (bullet of feature().bullets; track bullet.text) {
+        <li class="feature-module__bullet">
+          <span
+            class="feature-module__bullet-icon"
+            [class]="'feature-module__bullet-icon--' + feature().accentColor"
+            aria-hidden="true">&#10003;</span>
+          <span>{{ bullet.text }}</span>
+        </li>
+      }
+    </ul>
+
+    <div class="feature-module__cta">
+      <a
+        class="feature-module__cta-link"
+        [routerLink]="feature().ctaRoute"
+        [fragment]="feature().id">
+        {{ feature().ctaText }} &rarr;
+      </a>
+    </div>
+  </div>
+
+  <div class="feature-module__visual">
+    <gos-feature-visual
+      [type]="feature().visualType"
+      [accent]="feature().accentColor" />
+  </div>
+</article>

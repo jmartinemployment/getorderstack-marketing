@@ -1,0 +1,160 @@
+<div class="feature-visual" [class]="'feature-visual--' + accent()" aria-hidden="true">
+  @switch (type()) {
+    @case ('pos-terminal') {
+      <div class="fv-pos">
+        <div class="fv-pos__header">
+          <span class="fv-pos__status"></span>
+          <span class="fv-pos__title-bar"></span>
+        </div>
+        <div class="fv-pos__grid">
+          @for (item of posItems; track $index) {
+            <div class="fv-pos__item" [class.fv-pos__item--active]="$index === 2"></div>
+          }
+        </div>
+        <div class="fv-pos__footer">
+          <div class="fv-pos__total"></div>
+          <div class="fv-pos__pay-btn"></div>
+        </div>
+      </div>
+    }
+    @case ('kds-display') {
+      <div class="fv-kds">
+        <div class="fv-kds__tickets">
+          @for (ticket of kdsTickets; track $index) {
+            <div class="fv-kds__ticket" [class]="'fv-kds__ticket--' + ticket.status">
+              <div class="fv-kds__ticket-header"></div>
+              <div class="fv-kds__ticket-items">
+                @for (item of ticket.items; track $index) {
+                  <div class="fv-kds__ticket-item"></div>
+                }
+              </div>
+              <div class="fv-kds__ticket-timer"></div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+    @case ('delivery-map') {
+      <div class="fv-delivery">
+        <div class="fv-delivery__map">
+          <div class="fv-delivery__zone"></div>
+          <div class="fv-delivery__restaurant"></div>
+          @for (pin of deliveryPins; track $index) {
+            <div
+              class="fv-delivery__pin"
+              [style.left.%]="pin.x"
+              [style.top.%]="pin.y">
+            </div>
+          }
+          <div class="fv-delivery__route"></div>
+        </div>
+        <div class="fv-delivery__sidebar">
+          <div class="fv-delivery__order"></div>
+          <div class="fv-delivery__order"></div>
+          <div class="fv-delivery__order fv-delivery__order--active"></div>
+        </div>
+      </div>
+    }
+    @case ('payment-flow') {
+      <div class="fv-payment">
+        <div class="fv-payment__card">
+          <div class="fv-payment__card-chip"></div>
+          <div class="fv-payment__card-number"></div>
+        </div>
+        <div class="fv-payment__arrow"></div>
+        <div class="fv-payment__receipt">
+          <div class="fv-payment__receipt-line"></div>
+          <div class="fv-payment__receipt-line fv-payment__receipt-line--short"></div>
+          <div class="fv-payment__receipt-divider"></div>
+          <div class="fv-payment__receipt-total"></div>
+          <div class="fv-payment__receipt-check"></div>
+        </div>
+      </div>
+    }
+    @case ('menu-builder') {
+      <div class="fv-menu">
+        <div class="fv-menu__sidebar">
+          @for (cat of menuCategories; track $index) {
+            <div class="fv-menu__cat" [class.fv-menu__cat--active]="$index === 1"></div>
+          }
+        </div>
+        <div class="fv-menu__items">
+          @for (item of menuItems; track $index) {
+            <div class="fv-menu__item">
+              <div class="fv-menu__item-img"></div>
+              <div class="fv-menu__item-info">
+                <div class="fv-menu__item-name"></div>
+                <div class="fv-menu__item-price"></div>
+              </div>
+              <div class="fv-menu__item-toggle"></div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+    @case ('analytics-dashboard') {
+      <div class="fv-analytics">
+        <div class="fv-analytics__stat-row">
+          @for (stat of analyticStats; track $index) {
+            <div class="fv-analytics__stat" [class.fv-analytics__stat--highlight]="$index === 0">
+              <div class="fv-analytics__stat-value"></div>
+              <div class="fv-analytics__stat-label"></div>
+              <div class="fv-analytics__stat-trend"></div>
+            </div>
+          }
+        </div>
+        <div class="fv-analytics__chart">
+          <div class="fv-analytics__line-chart">
+            <svg viewBox="0 0 200 60" preserveAspectRatio="none" class="fv-analytics__svg">
+              <defs>
+                <linearGradient id="chart-fill-gradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="currentColor" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <polyline
+                fill="url(#chart-fill-gradient)"
+                stroke="none"
+                points="0,50 25,42 50,45 75,30 100,35 125,20 150,15 175,22 200,8 200,60 0,60" />
+              <polyline
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                points="0,50 25,42 50,45 75,30 100,35 125,20 150,15 175,22 200,8" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    }
+    @case ('ai-insights') {
+      <div class="fv-ai">
+        <div class="fv-ai__chat">
+          <div class="fv-ai__msg fv-ai__msg--user">
+            <div class="fv-ai__msg-bubble fv-ai__msg-bubble--user"></div>
+          </div>
+          <div class="fv-ai__msg fv-ai__msg--ai">
+            <div class="fv-ai__msg-avatar">AI</div>
+            <div class="fv-ai__msg-content">
+              <div class="fv-ai__msg-bubble fv-ai__msg-bubble--ai"></div>
+              <div class="fv-ai__msg-bubble fv-ai__msg-bubble--ai fv-ai__msg-bubble--short"></div>
+            </div>
+          </div>
+          <div class="fv-ai__msg fv-ai__msg--user">
+            <div class="fv-ai__msg-bubble fv-ai__msg-bubble--user fv-ai__msg-bubble--short"></div>
+          </div>
+          <div class="fv-ai__msg fv-ai__msg--ai">
+            <div class="fv-ai__msg-avatar">AI</div>
+            <div class="fv-ai__msg-content">
+              <div class="fv-ai__msg-bubble fv-ai__msg-bubble--ai"></div>
+              <div class="fv-ai__insight-card">
+                <div class="fv-ai__insight-icon"></div>
+                <div class="fv-ai__insight-text"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fv-ai__input-bar"></div>
+      </div>
+    }
+  }
+</div>

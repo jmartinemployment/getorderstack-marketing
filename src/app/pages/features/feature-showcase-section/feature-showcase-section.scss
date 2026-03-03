@@ -1,0 +1,17 @@
+@use 'styles/mixins' as *;
+
+.feature-showcase {
+  background: var(--gos-white);
+}
+
+.feature-showcase__header {
+  padding: var(--gos-space-20) 0 var(--gos-space-8);
+
+  @include above(lg) {
+    padding: var(--gos-space-32) 0 var(--gos-space-12);
+  }
+}
+
+.feature-showcase__modules {
+  padding-bottom: var(--gos-space-20);
+}

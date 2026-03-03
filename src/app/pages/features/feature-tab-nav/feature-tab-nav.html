@@ -1,0 +1,16 @@
+<nav class="feature-tabs" role="tablist" aria-label="Feature navigation">
+  <div class="feature-tabs__track">
+    @for (feature of features(); track feature.id) {
+      <button
+        class="feature-tabs__tab"
+        [class.feature-tabs__tab--active]="activeId() === feature.id"
+        role="tab"
+        [attr.aria-selected]="activeId() === feature.id"
+        [attr.aria-controls]="'feature-' + feature.id"
+        [id]="'tab-' + feature.id"
+        (click)="tabSelected.emit(feature.id)">
+        {{ feature.tag }}
+      </button>
+    }
+  </div>
+</nav>

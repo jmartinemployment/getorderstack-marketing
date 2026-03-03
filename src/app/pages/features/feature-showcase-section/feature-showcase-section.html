@@ -1,0 +1,31 @@
+<section class="feature-showcase" id="features" aria-labelledby="features-heading">
+  @if (showSectionHeader()) {
+    <gos-container>
+      <div gosScrollReveal class="feature-showcase__header">
+        <gos-section-header
+          [eyebrow]="config().sectionEyebrow"
+          [title]="config().sectionTitle"
+          [subtitle]="config().sectionSubtitle"
+          align="center" />
+      </div>
+    </gos-container>
+  }
+
+  @if (showTabNav()) {
+    <gos-feature-tab-nav
+      [features]="config().features"
+      [activeId]="activeFeatureId()"
+      (tabSelected)="onTabSelected($event)" />
+  }
+
+  <gos-container>
+    <div class="feature-showcase__modules">
+      @for (feature of config().features; track feature.id; let i = $index) {
+        <gos-feature-module
+          [feature]="feature"
+          [reversed]="i % 2 !== 0"
+          [index]="i" />
+      }
+    </div>
+  </gos-container>
+</section>

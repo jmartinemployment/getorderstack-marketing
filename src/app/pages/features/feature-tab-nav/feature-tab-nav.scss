@@ -1,0 +1,59 @@
+@use 'styles/mixins' as *;
+
+.feature-tabs {
+  position: sticky;
+  top: 72px;
+  z-index: var(--gos-z-sticky);
+  background: var(--gos-white);
+  border-bottom: 1px solid var(--gos-gray-200);
+
+  @include below(lg) {
+    top: 64px;
+  }
+}
+
+.feature-tabs__track {
+  @include container;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.feature-tabs__tab {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  padding: var(--gos-space-4) var(--gos-space-6);
+  font-family: var(--gos-font-body);
+  font-size: var(--gos-text-sm);
+  font-weight: var(--gos-weight-medium);
+  color: var(--gos-gray-500);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--gos-transition-fast),
+              border-color var(--gos-transition-fast);
+
+  &:hover {
+    color: var(--gos-gray-900);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--gos-primary);
+    outline-offset: -2px;
+  }
+
+  &--active {
+    color: var(--gos-primary);
+    border-bottom-color: var(--gos-primary);
+    font-weight: var(--gos-weight-semibold);
+  }
+}

@@ -4,6 +4,7 @@ import { HeroSectionComponent } from './hero-section/hero-section';
 import { ProductMockupComponent } from './product-mockup/product-mockup';
 import { TrustStripComponent } from './trust-strip/trust-strip';
 import { PainPointsSectionComponent } from './pain-points/pain-points-section/pain-points-section';
+import { FeatureShowcaseSectionComponent } from '../features/feature-showcase-section/feature-showcase-section';
 
 @Component({
   selector: 'gos-home-page',
@@ -15,6 +16,7 @@ import { PainPointsSectionComponent } from './pain-points/pain-points-section/pa
     ProductMockupComponent,
     TrustStripComponent,
     PainPointsSectionComponent,
+    FeatureShowcaseSectionComponent,
   ],
   template: `
     <gos-hero-background>
@@ -23,6 +25,9 @@ import { PainPointsSectionComponent } from './pain-points/pain-points-section/pa
       <gos-trust-strip />
     </gos-hero-background>
     <gos-pain-points-section />
+    <gos-feature-showcase-section
+      [showTabNav]="false"
+      [showSectionHeader]="true" />
   `,
   styles: [`
     :host { display: block; }
