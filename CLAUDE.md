@@ -148,4 +148,21 @@ ng build                    # Production build
 - Added animations: gos-mesh-shift, gos-float, gos-count-pulse
 - Barrel export at pages/home/index.ts
 - 82 tests across 17 spec files, all passing
-- Next: C-04 (features showcase)
+- Next: C-04 (pain points section)
+
+**March 3, 2026 (C-04):**
+- Built pain points & problem statement section: 3 new components + shared directive + config
+- PainPointsSectionComponent: section layout with card grid, gradient transition from dark hero
+- PainPointCardComponent: icon-driven stat card with CSS-only icons (commission, lock, hidden, clock)
+- BridgeCtaComponent: transition text + CTA linking to /features with bouncing arrow
+- ScrollRevealDirective: reusable IntersectionObserver directive at shared/directives/, SSR-safe
+- pain-points.config.ts: externalized all copy for A/B testing
+- Cards use accent colors: error (red), warning (yellow), primary (blue) for stat callouts
+- Responsive grid: 1 col mobile, 2 col tablet, 4 col desktop
+- Staggered scroll reveal: 120ms delay between each card entrance
+- prefers-reduced-motion: reduce disables all animations
+- Section has id="problems" for deep linking
+- Fixed: ScrollRevealDirective handles empty class from bare attribute usage
+- Fixed: zoneless project uses vi.useFakeTimers() not fakeAsync()
+- 112 tests across 21 spec files, all passing
+- Next: C-05 (features showcase)

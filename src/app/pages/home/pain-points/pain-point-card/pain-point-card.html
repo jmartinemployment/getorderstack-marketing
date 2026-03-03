@@ -1,0 +1,15 @@
+<article class="pain-card" [class]="'pain-card pain-card--' + painPoint().accentColor">
+  <div class="pain-card__icon-wrapper">
+    <div class="pain-card__icon" [class]="'pain-card__icon pain-card__icon--' + painPoint().icon"></div>
+  </div>
+
+  <div class="pain-card__stat">
+    <span class="pain-card__stat-value">{{ painPoint().stat }}</span>
+    @if (painPoint().statSuffix) {
+      <span class="pain-card__stat-suffix">{{ painPoint().statSuffix }}</span>
+    }
+  </div>
+
+  <h3 class="pain-card__headline">{{ painPoint().headline }}</h3>
+  <p class="pain-card__description">{{ painPoint().description }}</p>
+</article>

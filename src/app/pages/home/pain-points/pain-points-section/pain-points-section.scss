@@ -1,0 +1,80 @@
+@use 'styles/mixins' as *;
+
+.pain-points {
+  padding: var(--gos-space-20) 0;
+  background: var(--gos-gray-50);
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(
+      to bottom,
+      var(--gos-secondary) 0%,
+      var(--gos-gray-50) 100%
+    );
+    pointer-events: none;
+  }
+
+  @include above(lg) {
+    padding: var(--gos-space-32) 0;
+  }
+}
+
+.pain-points__header {
+  margin-bottom: var(--gos-space-12);
+  position: relative;
+  z-index: 1;
+
+  @include above(lg) {
+    margin-bottom: var(--gos-space-16);
+  }
+}
+
+.pain-points__grid {
+  display: grid;
+  gap: var(--gos-space-6);
+  grid-template-columns: 1fr;
+
+  @include above(md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gos-space-8);
+  }
+
+  @include above(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pain-points__bridge {
+  margin-top: var(--gos-space-16);
+
+  @include above(lg) {
+    margin-top: var(--gos-space-20);
+  }
+}
+
+// Scroll reveal animation styles
+[gosScrollReveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [gosScrollReveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

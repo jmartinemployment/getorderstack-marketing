@@ -1,0 +1,26 @@
+<section class="pain-points" id="problems" aria-labelledby="pain-points-heading">
+  <gos-container>
+    <div gosScrollReveal class="pain-points__header">
+      <gos-section-header
+        [eyebrow]="config().sectionEyebrow"
+        [title]="config().sectionTitle"
+        [subtitle]="config().sectionSubtitle"
+        align="center" />
+    </div>
+
+    <div class="pain-points__grid">
+      @for (point of config().painPoints; track point.headline; let i = $index) {
+        <div
+          gosScrollReveal
+          [gosScrollRevealDelay]="i * 120"
+          class="pain-points__card-wrapper">
+          <gos-pain-point-card [painPoint]="point" />
+        </div>
+      }
+    </div>
+
+    <div gosScrollReveal class="pain-points__bridge">
+      <gos-bridge-cta [config]="config().bridge" />
+    </div>
+  </gos-container>
+</section>

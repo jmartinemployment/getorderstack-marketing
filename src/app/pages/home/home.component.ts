@@ -3,6 +3,7 @@ import { HeroBackgroundComponent } from './hero-background/hero-background';
 import { HeroSectionComponent } from './hero-section/hero-section';
 import { ProductMockupComponent } from './product-mockup/product-mockup';
 import { TrustStripComponent } from './trust-strip/trust-strip';
+import { PainPointsSectionComponent } from './pain-points/pain-points-section/pain-points-section';
 
 @Component({
   selector: 'gos-home-page',
@@ -13,6 +14,7 @@ import { TrustStripComponent } from './trust-strip/trust-strip';
     HeroSectionComponent,
     ProductMockupComponent,
     TrustStripComponent,
+    PainPointsSectionComponent,
   ],
   template: `
     <gos-hero-background>
@@ -20,6 +22,7 @@ import { TrustStripComponent } from './trust-strip/trust-strip';
       <gos-product-mockup />
       <gos-trust-strip />
     </gos-hero-background>
+    <gos-pain-points-section />
   `,
   styles: [`
     :host { display: block; }
